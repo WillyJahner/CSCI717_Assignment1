@@ -13,15 +13,13 @@ public class EncryptionMachine {
 		// Call the method to print the introductory message
 		app.printIntroMessage();
 		
-		// Encrypt a single letter
-		// Note that this iteration of encryptSingleLetter() encrypts the specified letter in the lowercase alphabet by 3
-		System.out.println("Iteration #2 - Parametrized letters");
-		for (int i=0; i<ALPHABET.length(); i++)
-		{
-			char letterToEncrypt = ALPHABET.charAt(i);
-			char result = encryptSingleLetter(letterToEncrypt);
-			System.out.println("Result of shifting '" + letterToEncrypt + "' by 3: " + result);
-		}
+		// Encrypt a single word
+		// Note that this iteration of encryptSingleWord() encrypts each character of the specified word by 3
+		System.out.println("Iteration #3 - Single word");
+		String wordToEncrypt = ALPHABET;
+		String encryptedWord = encryptSingleWord(wordToEncrypt);
+		System.out.println(" Original Word: " + wordToEncrypt);
+		System.out.println("Encrypted Word: " + encryptedWord);
 	}
 	
 	// TODO: Add description for printIntroMessage() method
@@ -56,6 +54,23 @@ public class EncryptionMachine {
 		// Finally, return the encrypted letter
 		char encryptedLetter = ALPHABET.charAt(shiftedIndex);
 		return encryptedLetter;
+	}
+	
+	// TODO: Add description for encryptSingleWord() method
+	public static String encryptSingleWord(String word) {
+		
+		// Instantiate a character array that will hold each encrypted character from the single word
+		char[] encryptedChars = new char[word.length()];
+		
+		// Encrypt each letter in the word
+		for (int i=0; i<word.length(); i++)
+		{
+			encryptedChars[i] = encryptSingleLetter(word.charAt(i));
+		}
+		
+		// Concatenate all characters from the character array into a final String to return
+		String encryptedWord = new String(encryptedChars);
+		return encryptedWord;
 	}
 
 }
