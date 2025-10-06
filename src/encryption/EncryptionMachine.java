@@ -1,6 +1,9 @@
 package encryption;
 
 public class EncryptionMachine {
+	
+	// Constants
+	public static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
 	// TODO: Add description for main() method
 	public static void main(String[] args) {
@@ -11,10 +14,14 @@ public class EncryptionMachine {
 		app.printIntroMessage();
 		
 		// Encrypt a single letter
-		// Note that this iteration of encryptSingleLetter shifts 'a' by 3
-		System.out.println("Iteration #1 - Single Letter");
-		char result = encryptSingleLetter();
-		System.out.println("Result of shifting 'a' by 3: " + result);
+		// Note that this iteration of encryptSingleLetter() encrypts the specified letter in the lowercase alphabet by 3
+		System.out.println("Iteration #2 - Parametrized letters");
+		for (int i=0; i<ALPHABET.length(); i++)
+		{
+			char letterToEncrypt = ALPHABET.charAt(i);
+			char result = encryptSingleLetter(letterToEncrypt);
+			System.out.println("Result of shifting '" + letterToEncrypt + "' by 3: " + result);
+		}
 	}
 	
 	// TODO: Add description for printIntroMessage() method
@@ -24,14 +31,30 @@ public class EncryptionMachine {
 						   "that your recipient can decrypt.\n");
 	}
 	
-	public static char encryptSingleLetter() {
+	// TODO: Add description for encryptSingleLetter() method
+	public static char encryptSingleLetter(char letter) {
 		// NOTE:
-		//   - This iteration of encryptSingleLetter() is to encrypt a fixed single letter
+		//   - This iteration of encryptSingleLetter() is to encrypt any letter in the lowercase alphabet
 		//     with a fixed shift of 3
-		char letter = 'a';
 		int shift = 3;
 		
-		char encryptedLetter = (char)(letter + shift);
+		// First, check if the letter is not a valid lowercase letter in the alphabet.
+		// Note that String.indexOf(char) will return -1 if the string does not contain the char.
+		if (ALPHABET.indexOf(letter) == -1)
+		{
+			// TODO: Do we want to throw an exception?
+			// For now, just return the letter unchanged
+			return letter;
+		}
+		
+		// Get the index of ALPHABET that the letter is at
+		int originalIndex = ALPHABET.indexOf(letter);
+		
+		// Now get the index of ALPHABET that the letter is at after applying the shift
+		int shiftedIndex = (originalIndex + shift) % ALPHABET.length();
+		
+		// Finally, return the encrypted letter
+		char encryptedLetter = ALPHABET.charAt(shiftedIndex);
 		return encryptedLetter;
 	}
 
