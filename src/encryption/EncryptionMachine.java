@@ -1,5 +1,7 @@
 package encryption;
 
+import java.util.Scanner;  // Import the Scanner class for user input
+
 public class EncryptionMachine {
 	
 	// Constants
@@ -7,26 +9,36 @@ public class EncryptionMachine {
 
 	// TODO: Add description for main() method
 	public static void main(String[] args) {
-		// Create an instance of the EncryptionMachine class
-		EncryptionMachine app = new EncryptionMachine();
 		
-		// Call the method to print the introductory message
-		app.printIntroMessage();
+		// Create a Scanner object to read input
+        Scanner scanner = new Scanner(System.in);
 		
-		// Encrypt a single word
-		// Note that this iteration of encryptSingleWord() encrypts each character of the specified word by 3
-		System.out.println("Iteration #3 - Single word");
-		String wordToEncrypt = ALPHABET;
-		String encryptedWord = encryptSingleWord(wordToEncrypt);
-		System.out.println(" Original Word: " + wordToEncrypt);
-		System.out.println("Encrypted Word: " + encryptedWord);
+		// Print the introductory message
+		printIntroMessage();
+		
+		//-- Start the encryption process --//
+		
+		// Encrypt the key
+		performKeyEncryption(scanner);
+		
+		// Encrypt the plaintext
+		performPlaintextEncryption(scanner);
+		
+		// Print the ending message
+		printEndingMessage();
 	}
 	
 	// TODO: Add description for printIntroMessage() method
-	public void printIntroMessage() {
+	public static void printIntroMessage() {
 		System.out.println("CSCI 717 Assignment 1 - Encryption Machine");
 		System.out.println("This program lets you encrypt a message with a key " +
 						   "that your recipient can decrypt.\n");
+	}
+	
+	// TODO: Add description for printEndingMessage() method
+	public static void printEndingMessage() {
+		System.out.println("Message is fully encrypted!");
+		System.out.println("Ending the Encryption Machine.");
 	}
 	
 	// TODO: Add description for encryptSingleLetter() method
@@ -71,6 +83,49 @@ public class EncryptionMachine {
 		// Concatenate all characters from the character array into a final String to return
 		String encryptedWord = new String(encryptedChars);
 		return encryptedWord;
+	}
+	
+	// TODO: Add description for performKeyEncryption() method
+	public static void performKeyEncryption(Scanner scanner) {
+		
+		// Ask the user to enter a key
+		System.out.println("Enter key:");
+		String plainTextKey = scanner.nextLine();
+		
+		// Encrypt the key
+		String encryptedKey = encryptSingleWord(plainTextKey);
+		
+		// Print out the encrypted key
+		System.out.println(plainTextKey + " has been encrypted to: " + encryptedKey + "\n");
+	}
+	
+	public static void performPlaintextEncryption(Scanner scanner) {
+		
+		// Ask the user for the number of words in their message
+		System.out.println("How many words are in your message?");
+		int numWords = scanner.nextInt();
+		scanner.nextLine(); // Advance the scanner to the next line
+		
+		// Read in that many words and		
+		// Print out the encrypted ciphertext for each word
+		for (int i=0; i<numWords; i++)
+		{
+			if (i == 0)
+			{
+				System.out.println("Enter the first word:");
+			}
+			else
+			{
+				System.out.println("Enter the next word:");
+			}
+			String plainTextWord = scanner.nextLine();
+			
+			// Encrypt the plaintext word
+			String encryptedWord = encryptSingleWord(plainTextWord);
+			
+			// Print out the encrypted word
+			System.out.println(plainTextWord + " has been encrypted to: " + encryptedWord + "\n");
+		}
 	}
 
 }
