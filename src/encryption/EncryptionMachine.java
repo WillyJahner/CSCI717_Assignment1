@@ -2,22 +2,29 @@ package encryption;
 
 import java.util.Scanner;  // Import the Scanner class for user input
 
+/**
+ * The main class for the EncryptionMachine application.
+ */
 public class EncryptionMachine {
 	
 	// Constants
 	public static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 	public static final int SHIFT = 3;
 
-	// TODO: Add description for main() method
+	/**
+	 * The entry point of the program.
+	 * 
+	 * @param args command-line arguments passed to the program
+	 */
 	public static void main(String[] args) {
-		
-		// Create a Scanner object to read input
-        Scanner scanner = new Scanner(System.in);
 		
 		// Print the introductory message
 		printIntroMessage();
 		
 		//-- Start the encryption process --//
+		
+		// Create a Scanner object to read input
+        Scanner scanner = new Scanner(System.in);
 		
 		// Encrypt the key
 		performKeyEncryption(scanner);
@@ -29,28 +36,37 @@ public class EncryptionMachine {
 		printEndingMessage();
 	}
 	
-	// TODO: Add description for printIntroMessage() method
+	/**
+	 * The method that prints the introductory message.
+	 */
 	public static void printIntroMessage() {
 		System.out.println("CSCI 717 Assignment 1 - Encryption Machine");
 		System.out.println("This program lets you encrypt a message with a key " +
 						   "that your recipient can decrypt.\n");
 	}
 	
-	// TODO: Add description for printEndingMessage() method
+	/**
+	 * The method that prints the ending message.
+	 */
 	public static void printEndingMessage() {
 		System.out.println("Message is fully encrypted!");
 		System.out.println("Ending the Encryption Machine.");
 	}
 	
-	// TODO: Add description for encryptSingleLetter() method
+	/**
+	 * The method that encrypts a single letter.
+	 * 
+	 * @param letter the single plaintext letter to encrypt
+	 * @return the single encrypted letter
+	 */
 	public static char encryptSingleLetter(char letter) {
 		
 		// First, check if the letter is not a valid lowercase letter in the alphabet.
 		// Note that String.indexOf(char) will return -1 if the string does not contain the char.
 		if (ALPHABET.indexOf(letter) == -1)
 		{
-			// TODO: Do we want to throw an exception?
-			// For now, just return the letter unchanged
+			System.out.println("'" + letter + "' is not a valid lowercase letter in the alphabet.");
+			System.out.println("Therefore, not encrypting '" + letter + "'.\n");
 			return letter;
 		}
 		
@@ -65,7 +81,12 @@ public class EncryptionMachine {
 		return encryptedLetter;
 	}
 	
-	// TODO: Add description for encryptSingleWord() method
+	/**
+	 * The method that encrypts a single word.
+	 * 
+	 * @param word the single plaintext word to encrypt
+	 * @return the single encrypted word
+	 */
 	public static String encryptSingleWord(String word) {
 		
 		// Instantiate a character array that will hold each encrypted character from the single word
@@ -82,7 +103,11 @@ public class EncryptionMachine {
 		return encryptedWord;
 	}
 	
-	// TODO: Add description for performKeyEncryption() method
+	/**
+	 * The method that asks the user for a key, encrypts it, and prints out the encrypted key.
+	 * 
+	 * @param scanner the Scanner object used to read the input
+	 */
 	public static void performKeyEncryption(Scanner scanner) {
 		
 		// Ask the user to enter a key
@@ -96,6 +121,12 @@ public class EncryptionMachine {
 		System.out.println(plainTextKey + " has been encrypted to: " + encryptedKey + "\n");
 	}
 	
+	/**
+	 * The method that asks the user for the number of words
+	 * and prints out the encrypted ciphertext for each word.
+	 * 
+	 * @param scanner the Scanner object used to read the input
+	 */
 	public static void performPlaintextEncryption(Scanner scanner) {
 		
 		// Ask the user for the number of words in their message
