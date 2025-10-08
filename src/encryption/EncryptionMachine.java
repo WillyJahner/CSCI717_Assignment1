@@ -6,6 +6,7 @@ public class EncryptionMachine {
 	
 	// Constants
 	public static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+	public static final int SHIFT = 3;
 
 	// TODO: Add description for main() method
 	public static void main(String[] args) {
@@ -43,10 +44,6 @@ public class EncryptionMachine {
 	
 	// TODO: Add description for encryptSingleLetter() method
 	public static char encryptSingleLetter(char letter) {
-		// NOTE:
-		//   - This iteration of encryptSingleLetter() is to encrypt any letter in the lowercase alphabet
-		//     with a fixed shift of 3
-		int shift = 3;
 		
 		// First, check if the letter is not a valid lowercase letter in the alphabet.
 		// Note that String.indexOf(char) will return -1 if the string does not contain the char.
@@ -60,8 +57,8 @@ public class EncryptionMachine {
 		// Get the index of ALPHABET that the letter is at
 		int originalIndex = ALPHABET.indexOf(letter);
 		
-		// Now get the index of ALPHABET that the letter is at after applying the shift
-		int shiftedIndex = (originalIndex + shift) % ALPHABET.length();
+		// Now get the index of ALPHABET that the letter is at after applying the SHIFT
+		int shiftedIndex = (originalIndex + SHIFT) % ALPHABET.length();
 		
 		// Finally, return the encrypted letter
 		char encryptedLetter = ALPHABET.charAt(shiftedIndex);
